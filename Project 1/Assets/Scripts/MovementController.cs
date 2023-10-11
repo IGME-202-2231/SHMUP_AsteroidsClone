@@ -5,17 +5,22 @@ using UnityEngine;
 public class MovementController : MonoBehaviour
 {
     [SerializeField]
-    private float speed = 1.0f;
+    private float acceleration = 0.2f;
+
+    [SerializeField]
+    private float speed = 0.0f;
 
     [SerializeField]
     private Vector3 velocity = Vector3.zero;
+
+    [SerializeField]
+    private float maxSpeed = 1.0f;
 
     private Vector3 objectPosition = Vector3.zero;
     private Vector3 direction = Vector3.zero;
 
     private float cameraHeight;
     private float cameraWidth;
-
 
     // Start is called before the first frame update
     void Start()
@@ -26,35 +31,41 @@ public class MovementController : MonoBehaviour
         cameraHeight = Camera.main.orthographicSize;
 
         cameraWidth = cameraHeight * Camera.main.aspect;
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        velocity = direction * speed * Time.deltaTime;
+        speed += acceleration * Time.deltaTime;
+
+        if (speed > maxSpeed * Time.deltaTime ) 
+        { 
+            speed = maxSpeed * Time.deltaTime;
+        }
+
+        velocity += direction * speed;
 
         objectPosition += velocity;
 
         // Check Position; if using collisions, need to make sure object isn't in a restricted area before moving it
-        if (objectPosition.y > cameraHeight)
+        if (objectPosition.y + GetComponent<SpriteInfo>().Radius > cameraHeight)
         {
-            objectPosition.y = cameraHeight;
+            objectPosition.y = cameraHeight - GetComponent<SpriteInfo>().Radius;
         }
 
-        if (objectPosition.y < -cameraHeight)
+        if (objectPosition.y - GetComponent<SpriteInfo>().Radius < -cameraHeight)
         {
-            objectPosition.y = -cameraHeight;
+            objectPosition.y = -cameraHeight + GetComponent<SpriteInfo>().Radius;
         }
 
-        if (objectPosition.x > cameraWidth)
+        if (objectPosition.x + GetComponent<SpriteInfo>().Radius > cameraWidth)
         {
-            objectPosition.x = cameraWidth;
+            objectPosition.x = cameraWidth - GetComponent<SpriteInfo>().Radius;
         }
 
-        if (objectPosition.x < -cameraWidth)
+        if (objectPosition.x - GetComponent<SpriteInfo>().Radius < -cameraWidth)
         {
-            objectPosition.x = -cameraWidth;
+            objectPosition.x = -cameraWidth + GetComponent<SpriteInfo>().Radius;
         }
 
         // Updates the actual object's position

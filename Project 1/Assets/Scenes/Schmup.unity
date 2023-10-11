@@ -347,6 +347,7 @@ GameObject:
   - component: {fileID: 1487288698}
   - component: {fileID: 1487288697}
   - component: {fileID: 1487288696}
+  - component: {fileID: 1487288701}
   m_Layer: 0
   m_Name: playerShip
   m_TagString: Untagged
@@ -473,8 +474,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6aa123df22c34941a979e0758f6c594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  acceleration: 0.5
+  speed: 5
   velocity: {x: 0, y: 0, z: 0}
+  maxSpeed: 5
 --- !u!212 &1487288699
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -535,13 +538,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1487288695}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.11014702, y: 0.019195747, z: 0.038108177}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.1184, y: -0.3364, z: 0.038108177}
+  m_LocalScale: {x: 1.8128, y: 1.8128, z: 1.8128}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1487288701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487288695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3457218892977a40bd6d9ef93da3582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0.5
+  renderer: {fileID: 1487288699}
 --- !u!1 &1639247756
 GameObject:
   m_ObjectHideFlags: 0
