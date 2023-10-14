@@ -477,7 +477,7 @@ MonoBehaviour:
   acceleration: 0.5
   speed: 5
   velocity: {x: 0, y: 0, z: 0}
-  maxSpeed: 5
+  maxSpeed: 1
 --- !u!212 &1487288699
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -558,7 +558,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 0.5
-  renderer: {fileID: 1487288699}
 --- !u!1 &1639247756
 GameObject:
   m_ObjectHideFlags: 0
