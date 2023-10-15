@@ -7,6 +7,9 @@ public class SpriteInfo : MonoBehaviour
     [SerializeField]
     private float radius = 1f;
 
+    [SerializeField]
+    private int health = 1;
+
     /// <summary>
     /// Whether an object is experiencing a collision
     /// </summary>
@@ -22,12 +25,19 @@ public class SpriteInfo : MonoBehaviour
         get { return radius; }
     }
 
+    public int Health
+    { 
+        get { return health; } 
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (isColliding)
         {
             GetComponent<SpriteRenderer>().color = Color.red;
+
+            health--;
         }
 
         else

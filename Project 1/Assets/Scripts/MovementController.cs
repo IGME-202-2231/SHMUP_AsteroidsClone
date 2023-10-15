@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovementController : MonoBehaviour
 {
     [SerializeField]
-    private float acceleration = 0.2f;
+    private float acceleration = 0.05f;
 
     [SerializeField]
     private float speed = 0.0f;
@@ -14,13 +14,18 @@ public class MovementController : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
 
     [SerializeField]
-    private float maxSpeed = 1.0f;
+    private float maxSpeed = 0.1f;
 
     private Vector3 objectPosition = Vector3.zero;
     private Vector3 direction = Vector3.zero;
 
     private float cameraHeight;
     private float cameraWidth;
+
+    public Vector3 Direction
+    {
+        get { return direction; }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -38,12 +43,12 @@ public class MovementController : MonoBehaviour
     {
         speed += acceleration * Time.deltaTime;
 
-        if (speed > maxSpeed * Time.deltaTime ) 
+        if (speed > maxSpeed ) 
         { 
-            speed = maxSpeed * Time.deltaTime;
+            speed = maxSpeed;
         }
 
-        velocity += direction * speed;
+        velocity += direction * speed * Time.deltaTime;
 
         objectPosition += velocity;
 
