@@ -7,6 +7,12 @@ public class CollisionManager : MonoBehaviour
     [SerializeField]
     private List<SpriteInfo> collidables = new List<SpriteInfo>();
 
+    [SerializeField]
+    private List<SpriteInfo> bullets = new List<SpriteInfo>();
+
+    [SerializeField]
+    private List<SpriteInfo> enemies = new List<SpriteInfo> ();
+
     // Start might be used to dynamically add all game objects in a scene to this list
 
     // Update is called once per frame
@@ -53,8 +59,14 @@ public class CollisionManager : MonoBehaviour
         return false;
     }
 
-    public void NewBullet(ProjectileController sample)
+    public void NewBullet(SpriteInfo sample)
     {
-        collidables.Add()
+        bullets.Add(sample);
     }
+
+    public void NewEnemy(SpriteInfo sample)
+    {
+        enemies.Add(sample);
+    }
+
 }
