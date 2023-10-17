@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class CollisionManager : MonoBehaviour
 {
-    [SerializeField]
-    private List<SpriteRenderer> projectiles = new List<SpriteRenderer>();
+    private List<GameObject> projectiles = new List<GameObject>();
 
     [SerializeField]
-    private List<SpriteRenderer> enemies = new List<SpriteRenderer> ();
+    private List<GameObject> enemies = new List<GameObject> ();
 
     // Start might be used to dynamically add all game objects in a scene to this list
 
@@ -19,11 +18,11 @@ public class CollisionManager : MonoBehaviour
         {
             for (int i = 0; i < projectiles.Count; i++)
             {
-                SpriteInfo projectile = projectiles[i].gameObject.GetComponent<SpriteInfo>();
+                SpriteInfo projectile = projectiles[i].GetComponent<SpriteInfo>();
 
                 for (int j = 0; j < enemies.Count; j++)
                 {
-                    SpriteInfo enemy = enemies[j].gameObject.GetComponent<SpriteInfo>();
+                    SpriteInfo enemy = enemies[j].GetComponent<SpriteInfo>();
 
                     if (CircleCheck(projectile, enemy))
                     {
@@ -59,19 +58,22 @@ public class CollisionManager : MonoBehaviour
         return false;
     }
 
-    public void AddProjectile(SpriteRenderer newProjectile)
+    public void AddProjectile(GameObject newProjectile)
     {
         projectiles.Add(newProjectile);
     }
 
-    public void CleanUpProjectile(SpriteRenderer projectile)
+    public void CleanUpProjectile(GameObject projectile)
     {
-        projectiles.Remove(projectile);
+        // Occasionally the removal of projectiles results in a disappeared error, does not affect game but is unsolved
+        int index = projectiles.IndexOf(projectile);
 
         Destroy(projectile);
+
+        projectiles.RemoveAt(index);
     }
 
-    public void AddEnemy(SpriteRenderer newEnemy)
+    public void AddEnemy(GameObject newEnemy)
     {
         enemies.Add(newEnemy);
     }

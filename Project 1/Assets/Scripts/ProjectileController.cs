@@ -43,6 +43,6 @@ public class ProjectileController : MonoBehaviour
 
         // transform.GetComponent<SpriteInfo>().Damage();
 
-        collisionManager.CleanUpProjectile(gameObject.GetComponent<SpriteRenderer>());
+        collisionManager.CleanUpProjectile(gameObject);
     }
 }

@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
     private Transform playerTarget;
 
     [SerializeField]
-    private SpriteRenderer[] enemyPrefabs = new SpriteRenderer[3];
+    private GameObject[] enemyPrefabs = new GameObject[3];
 
     [SerializeField]
     private CollisionManager collisionManager;
@@ -105,8 +105,6 @@ public class EnemySpawner : MonoBehaviour
         }
 
         collisionManager.AddEnemy(Instantiate(enemyPrefabs[enemyType], startPosition, Quaternion.identity, transform));
-
-        // some error here, prevents the object from being cast, may be a result in the unity instead
     }
 
 

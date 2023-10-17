@@ -5,7 +5,7 @@ using UnityEngine;
 public class FireProjectile : MonoBehaviour
 {
     [SerializeField]
-    private SpriteRenderer projectile;
+    private GameObject projectile;
 
     [SerializeField]
     private CollisionManager collisionManager;
@@ -14,13 +14,6 @@ public class FireProjectile : MonoBehaviour
     {
         get { return collisionManager; }
     }
-
-    // private List<SpriteRenderer> projectiles = new List<SpriteRenderer>();
-    /*
-    public List<SpriteRenderer> Projectiles
-    {
-        get { return projectiles; }
-    }*/
 
     public void Fire()
     {
