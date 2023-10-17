@@ -244,9 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef3330f65d726074d882d5a5329d47ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collidables:
-  - {fileID: 1487288701}
-  bullets: []
+  projectiles: []
   enemies: []
 --- !u!4 &577058178
 Transform:
@@ -294,7 +292,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTarget: {fileID: 1487288700}
   enemyPrefabs:
-  - {fileID: 258809318635850369, guid: a09517893e0a5d74da0bd2856b37d1a6, type: 3}
+  - {fileID: 8420705616303845821, guid: a09517893e0a5d74da0bd2856b37d1a6, type: 3}
+  collisionManager: {fileID: 577058177}
 --- !u!4 &579664762
 Transform:
   m_ObjectHideFlags: 0
@@ -434,17 +433,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4129763955798848017, guid: 426fedf9003c57e49b42f67be991f5b0, type: 3}
   m_PrefabInstance: {fileID: 8294330070565870416}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1487288701 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8200452146066915699, guid: 426fedf9003c57e49b42f67be991f5b0, type: 3}
-  m_PrefabInstance: {fileID: 8294330070565870416}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3457218892977a40bd6d9ef93da3582, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1487288702 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3740478171655145031, guid: 426fedf9003c57e49b42f67be991f5b0, type: 3}
@@ -716,6 +704,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3740478171655145031, guid: 426fedf9003c57e49b42f67be991f5b0, type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 8753020960287367023, guid: 5ed1f78ca2121a841ad2103a9c8bc518, type: 3}
+    - target: {fileID: 3740478171655145031, guid: 426fedf9003c57e49b42f67be991f5b0, type: 3}
+      propertyPath: collisionManager
+      value: 
+      objectReference: {fileID: 577058177}
     - target: {fileID: 4129763955798848017, guid: 426fedf9003c57e49b42f67be991f5b0, type: 3}
       propertyPath: m_RootOrder
       value: 1

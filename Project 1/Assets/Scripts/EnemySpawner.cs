@@ -105,7 +105,11 @@ public class EnemySpawner : MonoBehaviour
         }
 
         collisionManager.AddEnemy(Instantiate(enemyPrefabs[enemyType], startPosition, Quaternion.identity, transform));
+
+        // some error here, prevents the object from being cast, may be a result in the unity instead
     }
+
+
     private IEnumerator WhenToSpawn()
     {
         yield return new WaitForSeconds(spawnTimer);
