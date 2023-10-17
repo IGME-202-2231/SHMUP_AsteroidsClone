@@ -21,7 +21,7 @@ public class CollisionManager : MonoBehaviour
             {
                 SpriteInfo projectile = projectiles[i].gameObject.GetComponent<SpriteInfo>();
 
-                for (int j = 0; i < enemies.Count; j++)
+                for (int j = 0; j < enemies.Count; j++)
                 {
                     SpriteInfo enemy = enemies[j].gameObject.GetComponent<SpriteInfo>();
 
