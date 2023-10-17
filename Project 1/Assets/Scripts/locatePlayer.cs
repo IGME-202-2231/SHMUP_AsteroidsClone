@@ -8,11 +8,15 @@ public class locatePlayer : MonoBehaviour
     [SerializeField]
     MovementController movementController;
 
-    [SerializeField]
-    Transform playerTransform;
+    Transform player;
+
+    private void Start()
+    {
+        player = transform.parent.GetComponent<EnemySpawner>().GetTarget;
+    }
 
     private void Update()
     {
-        movementController.SetDirection(playerTransform.position - transform.position);
+        movementController.SetDirection(player.transform.position - transform.position);
     }
 }

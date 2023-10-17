@@ -7,16 +7,27 @@ public class FireProjectile : MonoBehaviour
     [SerializeField]
     private SpriteRenderer projectile;
 
-    private List<SpriteRenderer> projectiles = new List<SpriteRenderer>();
+    [SerializeField]
+    private CollisionManager collisionManager;
 
-    // Update is called once per frame
-    void Update()
+    public CollisionManager CollisionManager
     {
-
+        get { return collisionManager; }
     }
+
+    // private List<SpriteRenderer> projectiles = new List<SpriteRenderer>();
+    /*
+    public List<SpriteRenderer> Projectiles
+    {
+        get { return projectiles; }
+    }*/
 
     public void Fire()
     {
-        projectiles.Add(Instantiate(projectile, transform.position, transform.rotation));
+        Vector3 position = transform.position;
+
+        Quaternion rotation = transform.rotation;
+
+        collisionManager.AddProjectile(Instantiate(projectile, position, rotation, transform));
     }
 }

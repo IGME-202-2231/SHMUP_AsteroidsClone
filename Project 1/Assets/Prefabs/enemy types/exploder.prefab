@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2854338586030965171}
   - component: {fileID: 4789594479895093200}
   m_Layer: 0
-  m_Name: enemy
+  m_Name: exploder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 0.31
+  health: 1
 --- !u!114 &2854338586030965171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,4 +130,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementController: {fileID: 2854338586030965171}
-  playerTransform: {fileID: 0}
+  player: {fileID: 4865241171516046137, guid: 426fedf9003c57e49b42f67be991f5b0, type: 3}

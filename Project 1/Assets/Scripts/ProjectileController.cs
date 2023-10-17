@@ -6,21 +6,43 @@ public class ProjectileController : MonoBehaviour
 {
     private Vector3 direction;
 
-    // Deal with movement
+    private float speed;
 
-    // Have a direction vector
+    private float projectileDespawn;
 
-    public void SetDirection(Vector3 newDirection)
+    private CollisionManager collisionManager;
+
+    private MovementController movementController;
+
+    void Start()
     {
-        if (direction != null)
-        {
-            direction = newDirection.normalized;
+        // Here is where all my problems lie, behold and weep yee of fragile hearts
+        collisionManager = transform.parent.GetComponent<FireProjectile>().CollisionManager;
 
-            if (direction != Vector3.zero)
-            {
-                transform.rotation = Quaternion.LookRotation(Vector3.back, direction);
-            }
-        }
+        movementController = transform.parent.gameObject.GetComponent<MovementController>();
+
+        speed = 5.0f;
+
+        direction = movementController.Direction;
+
+        projectileDespawn = 3.0f;
+
+        StartCoroutine(Despawn());
     }
 
+    void Update()
+    {
+        transform.position += direction * speed * Time.deltaTime;
+    }
+
+    private IEnumerator Despawn()
+    {
+        yield return new WaitForSeconds(projectileDespawn);
+
+        // transform.parent.GetComponent<FireProjectile>().Eliminate(transform.GetComponent<SpriteRenderer>());
+
+        // transform.GetComponent<SpriteInfo>().Damage();
+
+        collisionManager.CleanUpProjectile(gameObject.GetComponent<SpriteRenderer>());
+    }
 }

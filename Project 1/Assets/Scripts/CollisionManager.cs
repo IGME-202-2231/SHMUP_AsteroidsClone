@@ -5,19 +5,18 @@ using UnityEngine;
 public class CollisionManager : MonoBehaviour
 {
     [SerializeField]
-    private List<SpriteInfo> collidables = new List<SpriteInfo>();
+    private List<SpriteRenderer> projectiles = new List<SpriteRenderer>();
 
     [SerializeField]
-    private List<SpriteInfo> bullets = new List<SpriteInfo>();
+    private List<SpriteRenderer> enemies = new List<SpriteRenderer> ();
 
-    [SerializeField]
-    private List<SpriteInfo> enemies = new List<SpriteInfo> ();
 
     // Start might be used to dynamically add all game objects in a scene to this list
 
     // Update is called once per frame
     void Update()
     {
+        /*
         // loop through to see if anything is colliding with player's vehicle
         // still seems wildly inefficient, is there a better way? - object pooling
         collidables[0].IsColliding = false;
@@ -32,7 +31,7 @@ public class CollisionManager : MonoBehaviour
                 Destroy(collidables[i].gameObject);
 
                 collidables.RemoveAt(i);
-            }*/
+            }
 
             collidables[i].IsColliding = false;
 
@@ -42,6 +41,52 @@ public class CollisionManager : MonoBehaviour
                 collidables[0].IsColliding = true;
             }
         }
+        */
+
+        if (enemies.Count > 0 && projectiles.Count > 0)
+        {
+            for (int i = 0; i < projectiles.Count; i++)
+            {
+                SpriteInfo projectile = projectiles[i].gameObject.GetComponent<SpriteInfo>();
+
+                for (int j = 0; i < enemies.Count; j++)
+                {
+                    SpriteInfo enemy = enemies[j].gameObject.GetComponent<SpriteInfo>();
+
+                    if (CircleCheck(projectile, enemy))
+                    {
+                        // projectile.isColliding = true;
+                        // enemy.isColliding = true;
+
+                        Destroy(projectiles[i]);
+                        Destroy(enemies[j]);
+
+                        projectiles.RemoveAt(i);
+                        enemies.RemoveAt(j);
+
+                        i--;
+                        j--;
+                    }
+                }
+            }
+        }
+        /*
+        foreach(SpriteRenderer enemy in enemies)
+        {
+            if (enemy.GetComponent<SpriteInfo>().Health <= 0)
+            {
+                enemies.
+            }
+        }
+
+        foreach(SpriteRenderer projectile in projectiles)
+        {
+            if (projectile.GetComponent<SpriteInfo>().Health <= 0)
+            {
+                projectileSpawner.Eliminate(projectile);
+            }
+        }*/
+
     }
 
     private bool CircleCheck(SpriteInfo spriteA, SpriteInfo spriteB)
@@ -59,14 +104,20 @@ public class CollisionManager : MonoBehaviour
         return false;
     }
 
-    public void NewBullet(SpriteInfo sample)
+    public void AddProjectile(SpriteRenderer newProjectile)
     {
-        bullets.Add(sample);
+        projectiles.Add(newProjectile);
     }
 
-    public void NewEnemy(SpriteInfo sample)
+    public void CleanUpProjectile(SpriteRenderer projectile)
     {
-        enemies.Add(sample);
+        projectiles.Remove(projectile);
+
+        Destroy(projectile);
     }
 
+    public void AddEnemy(SpriteRenderer newEnemy)
+    {
+        enemies.Add(newEnemy);
+    }
 }

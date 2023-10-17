@@ -23,8 +23,8 @@ public class MovementController : MonoBehaviour
     private float cameraWidth;
 
     public Vector3 Direction
-    {
-        get { return direction; }
+    { 
+        get { return direction; } 
     }
 
     // Start is called before the first frame update

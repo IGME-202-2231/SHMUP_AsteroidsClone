@@ -9,7 +9,7 @@ public class InputController : MonoBehaviour
     MovementController movementController;
 
     [SerializeField]
-    ProjectileController projectileController;
+    FireProjectile projectileSpawner;
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -20,15 +20,7 @@ public class InputController : MonoBehaviour
     {
         if (context.performed)
         {
-            projectileController.SetDirection(movementController.Direction);
-
-            // Should fire the bullet
-                // creates a bullet
-
-                    // needs a direction
-                // adds it to any CollisionManager lists
-
-
+            projectileSpawner.Fire();
         }
     }
 

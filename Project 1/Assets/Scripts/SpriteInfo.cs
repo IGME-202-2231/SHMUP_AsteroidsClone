@@ -13,12 +13,7 @@ public class SpriteInfo : MonoBehaviour
     /// <summary>
     /// Whether an object is experiencing a collision
     /// </summary>
-    private bool isColliding = false;
-
-    public bool IsColliding
-    {
-        set { isColliding = value; }
-    }
+    public bool isColliding {  get; set; }
 
     public float Radius
     {
@@ -35,14 +30,7 @@ public class SpriteInfo : MonoBehaviour
     {
         if (isColliding)
         {
-            GetComponent<SpriteRenderer>().color = Color.red;
-
             health--;
-        }
-
-        else
-        {
-            GetComponent<SpriteRenderer>().color = Color.white;
         }
     }
 
@@ -51,5 +39,10 @@ public class SpriteInfo : MonoBehaviour
         Gizmos.color = Color.green;
 
         Gizmos.DrawWireSphere(transform.position, radius);
+    }
+
+    public void Damage()
+    {
+        health--;
     }
 }
