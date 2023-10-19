@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementController: {fileID: 4830061187118896206}
-  projectileController: {fileID: 0}
+  projectileSpawner: {fileID: 0}
 --- !u!114 &391144278841474384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,6 +237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3457218892977a40bd6d9ef93da3582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionManager: {fileID: 0}
+  collisionType: 1
   radius: 0.5
   health: 1
 --- !u!114 &3740478171655145031
@@ -252,3 +254,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 8753020960287367023, guid: 5ed1f78ca2121a841ad2103a9c8bc518, type: 3}
+  player: {fileID: 0}
+  collisionManager: {fileID: 0}

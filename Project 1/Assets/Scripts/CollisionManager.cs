@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class CollisionManager : MonoBehaviour
 {
-    private List<GameObject> projectiles = new List<GameObject>();
+    private List<GameObject> playerProjectiles = new List<GameObject>();
 
-    [SerializeField]
+    private List<GameObject> enemyProjectiles = new List<GameObject>();
+
     private List<GameObject> enemies = new List<GameObject> ();
 
     // Start might be used to dynamically add all game objects in a scene to this list
@@ -14,11 +15,11 @@ public class CollisionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enemies.Count > 0 && projectiles.Count > 0)
+        if (enemies.Count > 0 && playerProjectiles.Count > 0)
         {
-            for (int i = 0; i < projectiles.Count; i++)
+            for (int i = 0; i < playerProjectiles.Count; i++)
             {
-                SpriteInfo projectile = projectiles[i].GetComponent<SpriteInfo>();
+                SpriteInfo projectile = playerProjectiles[i].GetComponent<SpriteInfo>();
 
                 for (int j = 0; j < enemies.Count; j++)
                 {
@@ -29,10 +30,10 @@ public class CollisionManager : MonoBehaviour
                         // projectile.isColliding = true;
                         // enemy.isColliding = true;
 
-                        Destroy(projectiles[i]);
+                        Destroy(playerProjectiles[i]);
                         Destroy(enemies[j]);
 
-                        projectiles.RemoveAt(i);
+                        playerProjectiles.RemoveAt(i);
                         enemies.RemoveAt(j);
 
                         i--;
@@ -60,17 +61,45 @@ public class CollisionManager : MonoBehaviour
 
     public void AddProjectile(GameObject newProjectile)
     {
-        projectiles.Add(newProjectile);
+        playerProjectiles.Add(newProjectile);
     }
 
     public void CleanUpProjectile(GameObject projectile)
     {
         // Occasionally the removal of projectiles results in a disappeared error, does not affect game but is unsolved
-        int index = projectiles.IndexOf(projectile);
+        int index = playerProjectiles.IndexOf(projectile);
 
         Destroy(projectile);
 
-        projectiles.RemoveAt(index);
+        playerProjectiles.RemoveAt(index);
+    }
+
+    public void CleanUp(GameObject gameObject, CollisionType listType)
+    {
+        int index = 0;
+
+        switch(listType)
+        {
+            case CollisionType.enemy:
+                index = enemies.IndexOf(gameObject);
+                break;
+
+            case CollisionType.player:
+                // what do here??
+                break;
+
+            case CollisionType.playerProjectile:
+                index = playerProjectiles.IndexOf(gameObject);
+                break;
+
+            case CollisionType.enemyProjectile:
+                index = enemyProjectiles.IndexOf(gameObject);
+                break;
+        }
+
+        Destroy(gameObject);
+
+        playerProjectiles.RemoveAt(index);
     }
 
     public void AddEnemy(GameObject newEnemy)

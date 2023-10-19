@@ -2,8 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CollisionType
+{
+    enemy,
+    player,
+    enemyProjectile,
+    playerProjectile
+}
+
+
 public class SpriteInfo : MonoBehaviour
 {
+    [SerializeField]
+    private CollisionManager collisionManager;
+
+    // The below fields are all determined by their prefab, so no need to set them to variables during start
+    [SerializeField]
+    private CollisionType collisionType;
+
     [SerializeField]
     private float radius = 1f;
 
@@ -20,17 +36,17 @@ public class SpriteInfo : MonoBehaviour
         get { return radius; }
     }
 
-    public int Health
-    { 
-        get { return health; } 
-    }
-
     // Update is called once per frame
     void Update()
     {
         if (isColliding)
         {
             health--;
+        }
+
+        if (health <= 0) // To be used in Collision manager w/ isColliding to replace current collision setup
+        {
+            // collisionManager.CleanUp(gameObject, collisionType);
         }
     }
 

@@ -5,7 +5,10 @@ using UnityEngine;
 public class FireProjectile : MonoBehaviour
 {
     [SerializeField]
-    private GameObject projectile;
+    private GameObject projectilePrefab;
+
+    [SerializeField]
+    private Transform player;
 
     [SerializeField]
     private CollisionManager collisionManager;
@@ -15,12 +18,17 @@ public class FireProjectile : MonoBehaviour
         get { return collisionManager; }
     }
 
+    public Transform Player
+    { 
+        get { return player; } 
+    }
+
     public void Fire()
     {
-        Vector3 position = transform.position;
+        GameObject projectile = Instantiate(projectilePrefab, player.position, player.rotation, transform);
 
-        Quaternion rotation = transform.rotation;
+        projectile.GetComponent<ProjectileController>().GiveInfo(collisionManager, player.gameObject.GetComponent<MovementController>().Direction);
 
-        collisionManager.AddProjectile(Instantiate(projectile, position, rotation, transform));
+        collisionManager.AddProjectile(projectile);
     }
 }

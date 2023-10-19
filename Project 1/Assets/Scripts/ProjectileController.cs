@@ -4,26 +4,22 @@ using UnityEngine;
 
 public class ProjectileController : MonoBehaviour
 {
+    private CollisionManager collisionManager;
+
     private Vector3 direction;
 
     private float speed;
 
     private float projectileDespawn;
 
-    private CollisionManager collisionManager;
-
-    private MovementController movementController;
-
     void Start()
     {
         // Here is where all my problems lie, behold and weep yee of fragile hearts
-        collisionManager = transform.parent.GetComponent<FireProjectile>().CollisionManager;
+        // collisionManager = transform.parent.GetComponent<FireProjectile>().CollisionManager;
 
-        movementController = transform.parent.gameObject.GetComponent<MovementController>();
+        // direction = transform.parent.gameObject.GetComponent<FireProjectile>().Player.gameObject.GetComponent<MovementController>().Direction;
 
         speed = 5.0f;
-
-        direction = movementController.Direction;
 
         projectileDespawn = 3.0f;
 
@@ -44,5 +40,11 @@ public class ProjectileController : MonoBehaviour
         // transform.GetComponent<SpriteInfo>().Damage();
 
         collisionManager.CleanUpProjectile(gameObject);
+    }
+
+    public void GiveInfo(CollisionManager collisionManager, Vector3 direction)
+    {
+        this.collisionManager = collisionManager;
+        this.direction = direction;
     }
 }
