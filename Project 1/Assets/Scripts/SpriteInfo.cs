@@ -13,7 +13,6 @@ public enum CollisionType
 
 public class SpriteInfo : MonoBehaviour
 {
-    [SerializeField]
     private CollisionManager collisionManager;
 
     // The below fields are all determined by their prefab, so no need to set them to variables during start
@@ -46,7 +45,7 @@ public class SpriteInfo : MonoBehaviour
 
         if (health <= 0) // To be used in Collision manager w/ isColliding to replace current collision setup
         {
-            // collisionManager.CleanUp(gameObject, collisionType);
+            collisionManager.CleanUp(gameObject, collisionType);
         }
     }
 
@@ -60,5 +59,14 @@ public class SpriteInfo : MonoBehaviour
     public void Damage()
     {
         health--;
+    }
+
+    /// <summary>
+    /// These getinfo methods grab info when an object is instantiated, but could easily be removed if singletons were used
+    /// </summary>
+    /// <param name="collisionManager"></param>
+    public void GetCollisions(CollisionManager collisionManager)
+    {
+        this.collisionManager = collisionManager;
     }
 }

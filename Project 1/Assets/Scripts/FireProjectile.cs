@@ -13,16 +13,6 @@ public class FireProjectile : MonoBehaviour
     [SerializeField]
     private CollisionManager collisionManager;
 
-    public CollisionManager CollisionManager
-    {
-        get { return collisionManager; }
-    }
-
-    public Transform Player
-    { 
-        get { return player; } 
-    }
-
     public void Fire()
     {
         GameObject projectile = Instantiate(projectilePrefab, player.position, player.rotation, transform);

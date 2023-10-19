@@ -27,9 +27,9 @@ public class CollisionManager : MonoBehaviour
 
                     if (CircleCheck(projectile, enemy))
                     {
-                        // projectile.isColliding = true;
-                        // enemy.isColliding = true;
-
+                        projectile.isColliding = true;
+                        enemy.isColliding = true;
+                        /*
                         Destroy(playerProjectiles[i]);
                         Destroy(enemies[j]);
 
@@ -37,7 +37,7 @@ public class CollisionManager : MonoBehaviour
                         enemies.RemoveAt(j);
 
                         i--;
-                        j--;
+                        j--;*/
                     }
                 }
             }
@@ -81,7 +81,10 @@ public class CollisionManager : MonoBehaviour
         switch(listType)
         {
             case CollisionType.enemy:
-                index = enemies.IndexOf(gameObject);
+                // index = enemies.IndexOf(gameObject);
+
+                enemies.Remove(gameObject);
+
                 break;
 
             case CollisionType.player:
@@ -89,17 +92,21 @@ public class CollisionManager : MonoBehaviour
                 break;
 
             case CollisionType.playerProjectile:
-                index = playerProjectiles.IndexOf(gameObject);
+                // index = playerProjectiles.IndexOf(gameObject);
+                playerProjectiles.Remove(gameObject);
                 break;
 
             case CollisionType.enemyProjectile:
-                index = enemyProjectiles.IndexOf(gameObject);
+                enemyProjectiles.Remove(gameObject);
+                break;
+
+            default:
                 break;
         }
 
         Destroy(gameObject);
 
-        playerProjectiles.RemoveAt(index);
+        // playerProjectiles.RemoveAt(index);
     }
 
     public void AddEnemy(GameObject newEnemy)

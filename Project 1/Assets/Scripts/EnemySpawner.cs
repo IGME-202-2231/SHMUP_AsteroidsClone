@@ -104,7 +104,12 @@ public class EnemySpawner : MonoBehaviour
                 break;
         }
 
-        collisionManager.AddEnemy(Instantiate(enemyPrefabs[enemyType], startPosition, Quaternion.identity, transform));
+        GameObject gameObject = Instantiate(enemyPrefabs[enemyType], startPosition, Quaternion.identity, transform);
+
+        gameObject.GetComponent<SpriteInfo>().GetCollisions(collisionManager);
+
+        collisionManager.AddEnemy(gameObject);
+
     }
 
 

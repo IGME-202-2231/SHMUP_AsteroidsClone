@@ -15,10 +15,7 @@ public class ProjectileController : MonoBehaviour
     void Start()
     {
         // Here is where all my problems lie, behold and weep yee of fragile hearts
-        // collisionManager = transform.parent.GetComponent<FireProjectile>().CollisionManager;
-
-        // direction = transform.parent.gameObject.GetComponent<FireProjectile>().Player.gameObject.GetComponent<MovementController>().Direction;
-
+            // I was being dramatic, passing in the objects when they are spawned fixed it
         speed = 5.0f;
 
         projectileDespawn = 3.0f;
@@ -35,10 +32,6 @@ public class ProjectileController : MonoBehaviour
     {
         yield return new WaitForSeconds(projectileDespawn);
 
-        // transform.parent.GetComponent<FireProjectile>().Eliminate(transform.GetComponent<SpriteRenderer>());
-
-        // transform.GetComponent<SpriteInfo>().Damage();
-
         collisionManager.CleanUpProjectile(gameObject);
     }
 
@@ -46,5 +39,7 @@ public class ProjectileController : MonoBehaviour
     {
         this.collisionManager = collisionManager;
         this.direction = direction;
+
+        gameObject.GetComponent<SpriteInfo>().GetCollisions(collisionManager);
     }
 }
