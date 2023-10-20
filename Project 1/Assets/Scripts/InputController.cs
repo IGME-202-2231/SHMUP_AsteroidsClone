@@ -16,12 +16,12 @@ public class InputController : MonoBehaviour
     {
         if (context.started)
         {
-            movementController.SetAcceleration(true);
+            movementController.EnableBoost = true;
         }
 
         if (context.performed)
         {
-            movementController.SetAcceleration(false);
+            movementController.EnableBoost = false;
         }
     }
 

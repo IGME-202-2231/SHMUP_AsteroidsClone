@@ -4,18 +4,15 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
+    private bool enableBoost;
+
     private float speed = 0.0f;
 
-    private float acceleration = 0.05f;
+    [SerializeField]
+    private float acceleration = 2.0f;
 
     [SerializeField]
-    private float maxSpeed = 0.1f;
-
-    /// <summary>
-    /// Won't be used until the look event is enabled, remember to set reg. acceleration back to 0
-    /// </summary>
-    [SerializeField]
-    private float maxAcceleration = 0.05f;
+    private float maxSpeed = 0.8f;
 
     private Vector3 velocity = Vector3.zero;
 
@@ -30,9 +27,18 @@ public class MovementController : MonoBehaviour
         get { return direction; } 
     }
 
+    public bool EnableBoost
+    {
+        set { enableBoost = value; }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        // begins as true for now while point direction is NOT implemented
+        // once implemented in tandem with space-boost, can remove from start
+        enableBoost = true;
+
         // Prevents teleporting to Vector3.zero
         objectPosition = transform.position;
 
@@ -44,14 +50,17 @@ public class MovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        speed += acceleration * Time.deltaTime;
+        if (enableBoost)
+        {
+            speed += acceleration;
 
-        if (speed > maxSpeed ) 
-        { 
-            speed = maxSpeed;
+            if (speed > maxSpeed)
+            {
+                speed = maxSpeed;
+            }
+
+            velocity += direction * speed * Time.deltaTime;
         }
-
-        velocity += direction * speed * Time.deltaTime;
 
         objectPosition += velocity;
 
@@ -108,18 +117,5 @@ public class MovementController : MonoBehaviour
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         transform.rotation = rotation;
-    }
-
-    public void SetAcceleration(bool accelerating)
-    {
-        if (accelerating)
-        {
-            acceleration = maxAcceleration;
-        }
-
-        else
-        {
-            acceleration = 0.0f;
-        }
     }
 }
