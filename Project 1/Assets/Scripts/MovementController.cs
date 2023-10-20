@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    [SerializeField]
+    private float speed = 0.0f;
+
     private float acceleration = 0.05f;
 
     [SerializeField]
-    private float speed = 0.0f;
-
-    [SerializeField]
-    private Vector3 velocity = Vector3.zero;
-
-    [SerializeField]
     private float maxSpeed = 0.1f;
+
+    /// <summary>
+    /// Won't be used until the look event is enabled, remember to set reg. acceleration back to 0
+    /// </summary>
+    [SerializeField]
+    private float maxAcceleration = 0.05f;
+
+    private Vector3 velocity = Vector3.zero;
 
     private Vector3 objectPosition = Vector3.zero;
     private Vector3 direction = Vector3.zero;
@@ -87,6 +90,36 @@ public class MovementController : MonoBehaviour
             {
                 transform.rotation = Quaternion.LookRotation(Vector3.back, direction);
             }
+        }
+    }
+
+    /// <summary>
+    /// Uses the old version of active input rather than the newer input system
+    /// Need to move this code into input controller, add to the look event
+    /// </summary>
+    public void PointDirection()
+    {
+        // The direction 
+        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+
+        // Converting the angle to degrees
+        float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+
+        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        transform.rotation = rotation;
+    }
+
+    public void SetAcceleration(bool accelerating)
+    {
+        if (accelerating)
+        {
+            acceleration = maxAcceleration;
+        }
+
+        else
+        {
+            acceleration = 0.0f;
         }
     }
 }

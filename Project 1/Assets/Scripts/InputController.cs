@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class InputController : MonoBehaviour
 {
@@ -11,9 +12,27 @@ public class InputController : MonoBehaviour
     [SerializeField]
     FireProjectile projectileSpawner;
 
+    public void OnBoost(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            movementController.SetAcceleration(true);
+        }
+
+        if (context.performed)
+        {
+            movementController.SetAcceleration(false);
+        }
+    }
+
     public void OnMove(InputAction.CallbackContext context)
     {
         movementController.SetDirection(context.ReadValue<Vector2>());
+    }
+
+    public void OnLook()
+    {
+
     }
 
     public void OnFire(InputAction.CallbackContext context)

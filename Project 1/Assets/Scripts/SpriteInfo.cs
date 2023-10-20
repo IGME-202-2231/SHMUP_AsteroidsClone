@@ -43,7 +43,7 @@ public class SpriteInfo : MonoBehaviour
             health--;
         }
 
-        if (health <= 0) // To be used in Collision manager w/ isColliding to replace current collision setup
+        if (health <= 0) // To be used in Collision manager w/ isColliding to replace current collision setup DONE
         {
             collisionManager.CleanUp(gameObject, collisionType);
         }
