@@ -5,9 +5,6 @@ using UnityEngine.InputSystem;
 
 public class locatePlayer : MonoBehaviour
 {
-    // [SerializeField]
-    // MovementController movementController;
-
     private float speed = 0.0f;
 
     [SerializeField]
@@ -20,7 +17,7 @@ public class locatePlayer : MonoBehaviour
 
     private Vector3 direction = Vector3.zero;
 
-    Transform player;
+    private Transform player;
 
     private void Start()
     {
@@ -29,7 +26,10 @@ public class locatePlayer : MonoBehaviour
 
     private void Update()
     {
-        SetDirection(player.transform.position - transform.position);
+        if (player.gameObject.activeSelf)
+        {
+            SetDirection(player.transform.position - transform.position);
+        }
 
         speed += acceleration;
 
@@ -55,7 +55,6 @@ public class locatePlayer : MonoBehaviour
             }
         }
     }
-
 
     /*
      *SetDirection()

@@ -5,6 +5,9 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField]
+    private TextMesh waveKeeper;
+
+    [SerializeField]
     private Transform playerTarget;
 
     [SerializeField]
@@ -20,7 +23,7 @@ public class EnemySpawner : MonoBehaviour
     /// <summary>
     /// The time between a wave being defeated and the start of a new one
     /// </summary>
-    private float waveTimer;
+    private const float waveTimer = 2.0f;
 
     /// <summary>
     /// The time between enemies being spawned into the scene
@@ -35,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
     /// <summary>
     /// The total number of enemies spawned during a wave
     /// </summary>
-    private int waveCount;
+    private int enemyWaveTotal;
 
     /// <summary>
     /// The current wave being faced
@@ -45,10 +48,9 @@ public class EnemySpawner : MonoBehaviour
     /// <summary>
     /// Allows the player object to be passed to newly created enemies
     /// </summary>
-
     public Transform GetTarget
-    {  
-        get { return playerTarget; } 
+    {
+        get { return playerTarget; }
     }
 
     // Start is called before the first frame update
@@ -58,17 +60,72 @@ public class EnemySpawner : MonoBehaviour
 
         halfWidth = halfHeight * Camera.main.aspect;
 
-        waveTimer = 5.0f;
+        spawnTimer = 5.2f;
 
-        spawnTimer = 5.0f;
-
-        enemyReserves = 0;
-
-        waveCount = 0;
+        enemyWaveTotal = 3;
+        enemyReserves = enemyWaveTotal;
 
         waveNumber = 0;
 
+        StartCoroutine(NextWave());
+    }
+
+    void Update()
+    {
+        if (enemyReserves <= 0 && collisionManager.EnemyCount <= 0)
+        {
+            StartCoroutine(NextWave());
+        }
+
+        if (!playerTarget.gameObject.activeSelf)
+        {
+            waveKeeper.gameObject.SetActive(true);
+
+            waveKeeper.transform.localScale /= 3;
+
+            waveKeeper.text = "Final Score: " + collisionManager.Score + "\nThank you for playing!";
+
+            gameObject.SetActive(false);
+        }
+    }
+
+    private IEnumerator WhenToSpawn()
+    {
+        yield return new WaitForSeconds(spawnTimer);
+
+        if (enemyReserves > 0 && playerTarget.gameObject.activeSelf)
+        {
+            enemyReserves--;
+
+            Spawn();
+
+            StartCoroutine(WhenToSpawn());
+        }
+    }
+
+    private IEnumerator NextWave()
+    {
+        if (waveNumber != 0)
+        {
+            spawnTimer -= 0.2f;
+            enemyWaveTotal += 5;
+            enemyReserves = enemyWaveTotal;
+
+            collisionManager.Score += 100;
+        }
+
+        waveNumber++;
+
+        waveKeeper.gameObject.SetActive(true);
+
+        waveKeeper.text = "Wave: " + waveNumber;
+
+        yield return new WaitForSeconds(waveTimer);
+
+        waveKeeper.gameObject.SetActive(false);
+
         StartCoroutine(WhenToSpawn());
+
     }
 
     public void Spawn()
@@ -81,7 +138,7 @@ public class EnemySpawner : MonoBehaviour
 
         Vector3 startPosition = Vector3.zero;
 
-        switch(side)
+        switch (side)
         {
             case 0: // Left
                 startPosition.x = -halfWidth;
@@ -109,17 +166,6 @@ public class EnemySpawner : MonoBehaviour
         gameObject.GetComponent<SpriteInfo>().GetCollisions(collisionManager);
 
         collisionManager.AddEnemy(gameObject);
-
-    }
-
-
-    private IEnumerator WhenToSpawn()
-    {
-        yield return new WaitForSeconds(spawnTimer);
-
-        Spawn();
-
-        StartCoroutine(WhenToSpawn());
     }
 
     // Instantiate a new enemy COMPLETE

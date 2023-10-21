@@ -13,6 +13,20 @@ public class CollisionManager : MonoBehaviour
 
     private List<GameObject> enemies = new List<GameObject> ();
 
+    private int score;
+
+    public int Score
+    {
+        get { return score; }
+
+       set { score = value; }
+    }
+
+    public int EnemyCount
+    {
+        get { return enemies.Count; }
+    }
+
     // Start might be used to dynamically add all game objects in a scene to this list
 
     // Update is called once per frame
@@ -37,9 +51,12 @@ public class CollisionManager : MonoBehaviour
             }
         }
 
-        PlayerCollision(enemies);
+        if (player.gameObject != null)
+        {
+            PlayerCollision(enemies);
 
-        PlayerCollision(enemyProjectiles);   
+            PlayerCollision(enemyProjectiles);
+        }
     }
 
     private void PlayerCollision(List<GameObject> list)
@@ -92,27 +109,26 @@ public class CollisionManager : MonoBehaviour
         {
             case CollisionType.enemy:
                 enemies.Remove(gameObject);
-                break;
+                score += 10;
+                goto default;
 
             case CollisionType.player:
-                // what do here??
-                    // game over
-                    // call next scene method
+                // player is deleted, enemies no longer spawn or reference the player
+                player.SetActive(false);
                 break;
 
             case CollisionType.playerProjectile:
                 playerProjectiles.Remove(gameObject);
-                break;
+                goto default;
 
             case CollisionType.enemyProjectile:
                 enemyProjectiles.Remove(gameObject);
-                break;
+                goto default;
 
             default:
+                Destroy(gameObject);
                 break;
         }
-
-        Destroy(gameObject);
     }
 
     public void AddEnemy(GameObject newEnemy)
