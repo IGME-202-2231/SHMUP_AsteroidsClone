@@ -11,13 +11,12 @@
 
 -   Camera Orientation: topdown
 -   Camera Movement: static / fixed
--   Player Health: _How are you handling player health? (healthbar, lives, ?)_
--   End Condition: _How does a game/round/level end?_
--   Scoring: _How does the player earn points in your game?_
+-   Player Health: The player has a health bar that resets at the end of each round
+-   End Condition: The player's health is reduced to zero
+-   Scoring: The player can earn points by killing enemies and completing a wave, while they are deducted for missed shots. Accuracy counts!
 
 ### Game Description
-
-_A brief explanation of your game. Inculde what is the objective for the player. Think about what would go on the back of a game box._
+A SCMUP clone most similar to the game Asteroids. The player has the freedom to move in any direction within the bounds of the screen, but as enemies start to fill the game space and attack the player things get a bit crowded. The player must survive an ever increasing number of enemies each wave for as long as possible, for there is no end of enemies in sight...
 
 ### Controls
 
@@ -26,11 +25,14 @@ _A brief explanation of your game. Inculde what is the objective for the player.
     -   Down: S / down arrow
     -   Left: A / left arrow 
     -   Right: D / right arrow
--   Fire: 
+-   Fire: Left Mouse Click
 
 ## You Additions
 
-_List out what you added to your game to make it different for you_
+The game has mutiple different enemy types:
+    The Exploder: this enemy cannot fire projectiles, and must instead throw itself at the player in order to deal damage.
+    The Wave: a group of enemies that rely on numbers to catch the player, they start from one side of the screen and slowly move to the next. All the while firing projectiles in a straight line.
+    The 
 
 ## Sources
 
@@ -40,9 +42,12 @@ http://freegameassets.blogspot.com/search?q=space+patrol
 Pixel Nebula Space Background -
 https://pixel-carvel.itch.io/space-background-2?download
 
+HUD Assets - 
+https://adwitr.itch.io/pixel-health-bar-asset-pack-2
+
 ## Known Issues
 
-_List any errors, lack of error checking, or specific information that I need to know to run your program_
+If the player is not inputing any movement controls, the projectiles will stay in place. If I am able to implement a much preferred look-at-mouse direction, this should fix the issue.
 
 ### Requirements not completed
 
