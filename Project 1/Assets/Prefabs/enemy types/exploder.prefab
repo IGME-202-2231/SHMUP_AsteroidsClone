@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1145643970935101233}
   - component: {fileID: 258809318635850369}
   - component: {fileID: 2690842246660456704}
-  - component: {fileID: 2854338586030965171}
   - component: {fileID: 4789594479895093200}
   m_Layer: 0
   m_Name: exploder
@@ -99,24 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3457218892977a40bd6d9ef93da3582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionType: 0
   radius: 0.31
   health: 1
---- !u!114 &2854338586030965171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8420705616303845821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6aa123df22c34941a979e0758f6c594, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  acceleration: 0.1
-  speed: 0
-  velocity: {x: 0, y: 0, z: 0}
-  maxSpeed: 0.05
 --- !u!114 &4789594479895093200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,5 +113,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d1f7a042ae84f947b89842c9f94a6c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementController: {fileID: 2854338586030965171}
-  player: {fileID: 4865241171516046137, guid: 426fedf9003c57e49b42f67be991f5b0, type: 3}
+  acceleration: 0.1
+  maxSpeed: 0.01

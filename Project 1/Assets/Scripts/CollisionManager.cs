@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CollisionManager : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject player;
+
     private List<GameObject> playerProjectiles = new List<GameObject>();
 
     private List<GameObject> enemyProjectiles = new List<GameObject>();
@@ -29,16 +32,28 @@ public class CollisionManager : MonoBehaviour
                     {
                         projectile.isColliding = true;
                         enemy.isColliding = true;
-                        /*
-                        Destroy(playerProjectiles[i]);
-                        Destroy(enemies[j]);
-
-                        playerProjectiles.RemoveAt(i);
-                        enemies.RemoveAt(j);
-
-                        i--;
-                        j--;*/
                     }
+                }
+            }
+        }
+
+        PlayerCollision(enemies);
+
+        PlayerCollision(enemyProjectiles);   
+    }
+
+    private void PlayerCollision(List<GameObject> list)
+    {
+        if (list.Count > 0)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                SpriteInfo projectile = list[i].GetComponent<SpriteInfo>();
+
+                if (CircleCheck(player.GetComponent<SpriteInfo>(), projectile))
+                {
+                    projectile.isColliding = true;
+                    player.GetComponent<SpriteInfo>().isColliding = true;
                 }
             }
         }
@@ -66,33 +81,26 @@ public class CollisionManager : MonoBehaviour
 
     public void CleanUpProjectile(GameObject projectile)
     {
-        // Occasionally the removal of projectiles results in a disappeared error, does not affect game but is unsolved
-        int index = playerProjectiles.IndexOf(projectile);
+        playerProjectiles.Remove(projectile);
 
         Destroy(projectile);
-
-        playerProjectiles.RemoveAt(index);
     }
 
     public void CleanUp(GameObject gameObject, CollisionType listType)
     {
-        int index = 0;
-
         switch(listType)
         {
             case CollisionType.enemy:
-                // index = enemies.IndexOf(gameObject);
-
                 enemies.Remove(gameObject);
-
                 break;
 
             case CollisionType.player:
                 // what do here??
+                    // game over
+                    // call next scene method
                 break;
 
             case CollisionType.playerProjectile:
-                // index = playerProjectiles.IndexOf(gameObject);
                 playerProjectiles.Remove(gameObject);
                 break;
 
@@ -105,8 +113,6 @@ public class CollisionManager : MonoBehaviour
         }
 
         Destroy(gameObject);
-
-        // playerProjectiles.RemoveAt(index);
     }
 
     public void AddEnemy(GameObject newEnemy)

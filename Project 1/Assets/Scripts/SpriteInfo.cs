@@ -10,9 +10,9 @@ public enum CollisionType
     playerProjectile
 }
 
-
 public class SpriteInfo : MonoBehaviour
 {
+    [SerializeField]
     private CollisionManager collisionManager;
 
     // The below fields are all determined by their prefab, so no need to set them to variables during start
@@ -23,7 +23,7 @@ public class SpriteInfo : MonoBehaviour
     private float radius = 1f;
 
     [SerializeField]
-    private int health = 1;
+    private float health = 1;
 
     /// <summary>
     /// Whether an object is experiencing a collision
@@ -35,12 +35,19 @@ public class SpriteInfo : MonoBehaviour
         get { return radius; }
     }
 
+    public float Health
+    {
+        get { return  health; }
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (isColliding)
         {
             health--;
+
+            isColliding = false;
         }
 
         if (health <= 0) // To be used in Collision manager w/ isColliding to replace current collision setup DONE
@@ -54,11 +61,6 @@ public class SpriteInfo : MonoBehaviour
         Gizmos.color = Color.green;
 
         Gizmos.DrawWireSphere(transform.position, radius);
-    }
-
-    public void Damage()
-    {
-        health--;
     }
 
     /// <summary>
