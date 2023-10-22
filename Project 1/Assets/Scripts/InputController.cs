@@ -12,27 +12,25 @@ public class InputController : MonoBehaviour
     [SerializeField]
     FireProjectile projectileSpawner;
 
+    [SerializeField]
+    Camera cam;
+
     public void OnBoost(InputAction.CallbackContext context)
     {
-        if (context.started)
-        {
-            movementController.EnableBoost = true;
-        }
-
         if (context.performed)
         {
-            movementController.EnableBoost = false;
+            movementController.EnableBoost = !movementController.EnableBoost;
         }
     }
 
-    public void OnMove(InputAction.CallbackContext context)
+    public void OnMove(InputAction.CallbackContext context) // Legacy
     {
         movementController.SetDirection(context.ReadValue<Vector2>());
     }
 
-    public void OnLook()
+    public void OnLook(InputAction.CallbackContext context)
     {
-
+        movementController.PointDirection(cam.ScreenToWorldPoint(context.ReadValue<Vector2>()));
     }
 
     public void OnFire(InputAction.CallbackContext context)

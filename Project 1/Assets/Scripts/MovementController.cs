@@ -29,6 +29,7 @@ public class MovementController : MonoBehaviour
 
     public bool EnableBoost
     {
+        get { return enableBoost; }
         set { enableBoost = value; }
     }
 
@@ -37,7 +38,7 @@ public class MovementController : MonoBehaviour
     {
         // begins as true for now while point direction is NOT implemented
         // once implemented in tandem with space-boost, can remove from start
-        enableBoost = true;
+        // enableBoost = true;
 
         // Prevents teleporting to Vector3.zero
         objectPosition = transform.position;
@@ -89,7 +90,7 @@ public class MovementController : MonoBehaviour
         transform.position = objectPosition;
     }
 
-    public void SetDirection(Vector3 newDirection)
+    public void SetDirection(Vector3 newDirection) // Legacy
     {
         if (direction != null)
         {
@@ -106,13 +107,13 @@ public class MovementController : MonoBehaviour
     /// Uses the old version of active input rather than the newer input system
     /// Need to move this code into input controller, add to the look event
     /// </summary>
-    public void PointDirection()
+    public void PointDirection(Vector3 cameraPosition)
     {
-        // The direction 
-        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        direction = (cameraPosition - transform.position).normalized;
 
-        // Converting the angle to degrees
-        float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+        direction.z = 0;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
 
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
