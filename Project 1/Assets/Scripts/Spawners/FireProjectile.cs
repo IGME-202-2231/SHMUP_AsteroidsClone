@@ -19,6 +19,6 @@ public class FireProjectile : MonoBehaviour
 
         projectile.GetComponent<ProjectileController>().GiveInfo(collisionManager, player.gameObject.GetComponent<MovementController>().Direction);
 
-        collisionManager.AddProjectile(projectile);
+        collisionManager.AddCollidable(projectile, projectile.GetComponent<SpriteInfo>().CollisionType);
     }
 }

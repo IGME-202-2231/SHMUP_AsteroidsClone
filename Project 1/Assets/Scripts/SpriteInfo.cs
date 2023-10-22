@@ -40,6 +40,11 @@ public class SpriteInfo : MonoBehaviour
         get { return  health; }
     }
 
+    public CollisionType CollisionType
+    {
+        get { return collisionType; }
+    }
+
     // Update is called once per frame
     void Update()
     {

@@ -8,10 +8,10 @@ public class locatePlayer : MonoBehaviour
     private float speed = 0.0f;
 
     [SerializeField]
-    private float acceleration = 2.0f;
+    private float acceleration = 0.005f;
 
     [SerializeField]
-    private float maxSpeed = 0.8f;
+    private float maxSpeed = 0.01f;
 
     private Vector3 velocity = Vector3.zero;
 
@@ -74,6 +74,5 @@ public class locatePlayer : MonoBehaviour
         velocity.limit(maxspeed);
         location.add(velocity);
         acceleration.mult(0);
-  }
      */
 }

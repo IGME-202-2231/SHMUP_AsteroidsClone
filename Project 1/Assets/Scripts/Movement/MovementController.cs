@@ -36,10 +36,6 @@ public class MovementController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // begins as true for now while point direction is NOT implemented
-        // once implemented in tandem with space-boost, can remove from start
-        // enableBoost = true;
-
         // Prevents teleporting to Vector3.zero
         objectPosition = transform.position;
 
@@ -56,8 +52,8 @@ public class MovementController : MonoBehaviour
             speed += acceleration;
 
             if (speed > maxSpeed)
-            {
-                speed = maxSpeed;
+            { 
+                speed = maxSpeed; 
             }
 
             velocity += direction * speed * Time.deltaTime;
@@ -103,15 +99,10 @@ public class MovementController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Uses the old version of active input rather than the newer input system
-    /// Need to move this code into input controller, add to the look event
-    /// </summary>
-    public void PointDirection(Vector3 cameraPosition)
+    public void PointDirection(Vector2 cameraPosition)
     {
-        direction = (cameraPosition - transform.position).normalized;
-
-        direction.z = 0;
+        // Made sure the cameraPosition is Vector2D, prevents objects from moving on z axis
+        direction = (cameraPosition - new Vector2(transform.position.x, transform.position.y)).normalized;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
 

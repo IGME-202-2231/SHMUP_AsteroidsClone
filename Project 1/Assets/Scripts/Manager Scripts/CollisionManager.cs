@@ -91,16 +91,22 @@ public class CollisionManager : MonoBehaviour
         return false;
     }
 
-    public void AddProjectile(GameObject newProjectile)
+    public void AddCollidable(GameObject collidable, CollisionType listType)
     {
-        playerProjectiles.Add(newProjectile);
-    }
+        switch (listType)
+        {
+            case CollisionType.enemy:
+                enemies.Add(collidable);
+                break;
 
-    public void CleanUpProjectile(GameObject projectile)
-    {
-        playerProjectiles.Remove(projectile);
+            case CollisionType.playerProjectile:
+                playerProjectiles.Add(collidable);
+                break;
 
-        Destroy(projectile);
+            case CollisionType.enemyProjectile:
+                enemyProjectiles.Add(collidable);
+                break;
+        }
     }
 
     public void CleanUp(GameObject gameObject, CollisionType listType)
@@ -129,10 +135,5 @@ public class CollisionManager : MonoBehaviour
                 Destroy(gameObject);
                 break;
         }
-    }
-
-    public void AddEnemy(GameObject newEnemy)
-    {
-        enemies.Add(newEnemy);
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -161,11 +162,53 @@ public class EnemySpawner : MonoBehaviour
                 break;
         }
 
-        GameObject gameObject = Instantiate(enemyPrefabs[enemyType], startPosition, Quaternion.identity, transform);
+        GameObject newEnemy = Instantiate(enemyPrefabs[enemyType], startPosition, Quaternion.identity, transform);
 
-        gameObject.GetComponent<SpriteInfo>().GetCollisions(collisionManager);
+        newEnemy.GetComponent<SpriteInfo>().GetCollisions(collisionManager);
 
-        collisionManager.AddEnemy(gameObject);
+        collisionManager.AddCollidable(newEnemy, newEnemy.GetComponent<SpriteInfo>().CollisionType);
+    }
+
+    public void Single(GameObject newEnemy, int side, Vector3 startPosition, float normalPosition, int enemyType)
+    {
+        switch (side)
+        {
+            case 0: // Left
+                startPosition.x = -halfWidth;
+                startPosition.y = halfHeight * normalPosition;
+                break;
+
+            case 1: // Up
+                startPosition.x = halfWidth * normalPosition;
+                startPosition.y = halfHeight;
+                break;
+
+            case 2: // Right
+                startPosition.x = halfWidth;
+                startPosition.y = halfHeight * normalPosition;
+                break;
+
+            case 3: // Down
+                startPosition.x = halfWidth * normalPosition;
+                startPosition.y = -halfHeight;
+                break;
+        }
+
+        newEnemy = Instantiate(enemyPrefabs[enemyType], startPosition, Quaternion.identity, transform);
+
+        newEnemy.GetComponent<SpriteInfo>().GetCollisions(collisionManager);
+
+        collisionManager.AddCollidable(newEnemy, newEnemy.GetComponent<SpriteInfo>().CollisionType);
+    }
+
+    public void Flotilla(GameObject newEnemy)
+    {
+        // switch statement to determine
+
+        // Instantiate 3 new flotilla enemies
+            // pass in their unique starting positions
+
+        //
     }
 
     // Instantiate a new enemy COMPLETE

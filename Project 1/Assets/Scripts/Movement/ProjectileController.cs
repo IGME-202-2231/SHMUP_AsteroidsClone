@@ -16,7 +16,7 @@ public class ProjectileController : MonoBehaviour
     {
         // Here is where all my problems lie, behold and weep yee of fragile hearts
             // I was being dramatic, passing in the objects when they are spawned fixed it
-        speed = 5.0f;
+        speed = 10.0f;
 
         projectileDespawn = 3.0f;
 
@@ -32,7 +32,7 @@ public class ProjectileController : MonoBehaviour
     {
         yield return new WaitForSeconds(projectileDespawn);
 
-        collisionManager.CleanUpProjectile(gameObject);
+        collisionManager.CleanUp(gameObject, gameObject.GetComponent<SpriteInfo>().CollisionType);
     }
 
     public void GiveInfo(CollisionManager collisionManager, Vector3 direction)
