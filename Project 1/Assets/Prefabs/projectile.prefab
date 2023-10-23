@@ -101,7 +101,7 @@ MonoBehaviour:
   collisionManager: {fileID: 0}
   collisionType: 3
   radius: 0.16
-  health: 1
+  maxHealth: 1
 --- !u!114 &-366254734360198619
 MonoBehaviour:
   m_ObjectHideFlags: 0

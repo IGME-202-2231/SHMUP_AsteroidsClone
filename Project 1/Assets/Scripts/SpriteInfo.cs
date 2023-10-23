@@ -22,8 +22,11 @@ public class SpriteInfo : MonoBehaviour
     [SerializeField]
     private float radius = 1f;
 
+    // health is a float variable for the sake of drawing the health bar, it 
     [SerializeField]
-    private float health = 1;
+    private float maxHealth;
+
+    private float health;
 
     /// <summary>
     /// Whether an object is experiencing a collision
@@ -43,6 +46,11 @@ public class SpriteInfo : MonoBehaviour
     public CollisionType CollisionType
     {
         get { return collisionType; }
+    }
+
+    void Start()
+    {
+        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -75,5 +83,17 @@ public class SpriteInfo : MonoBehaviour
     public void GetCollisions(CollisionManager collisionManager)
     {
         this.collisionManager = collisionManager;
+    }
+
+    public void ResetHealth()
+    {
+        health = maxHealth;
+    }
+
+    public IEnumerator Despawn()
+    {
+        yield return new WaitForSeconds(10);
+
+        collisionManager.CleanUp(gameObject, gameObject.GetComponent<SpriteInfo>().CollisionType);
     }
 }

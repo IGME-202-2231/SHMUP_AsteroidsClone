@@ -20,7 +20,9 @@ public class ProjectileController : MonoBehaviour
 
         projectileDespawn = 3.0f;
 
-        StartCoroutine(Despawn());
+        // StartCoroutine(Despawn());
+
+        StartCoroutine(gameObject.GetComponent<SpriteInfo>().Despawn());
     }
 
     void Update()

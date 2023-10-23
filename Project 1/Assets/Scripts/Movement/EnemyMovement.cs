@@ -4,9 +4,9 @@ using UnityEngine;
 
 public enum EnemyType
 {
-    artillery,
     exploder,
-    flotilla
+    flotilla,
+    artillery
 }
 
 public class EnemyMovement : MonoBehaviour
@@ -25,50 +25,70 @@ public class EnemyMovement : MonoBehaviour
 
     private Transform player;
 
-    private EnemyType typeEnemy;
+    private EnemyType enemyType;
 
     void Start()
     {
         player = transform.parent.GetComponent<EnemySpawner>().GetTarget;
+
+        switch (enemyType)
+        {
+            case EnemyType.exploder:
+                speed = 5;
+                break;
+
+            case EnemyType.flotilla:
+                speed = 4;
+                StartCoroutine(gameObject.GetComponent<SpriteInfo>().Despawn());
+                break;
+
+            case EnemyType.artillery:
+                speed = 1;
+                StartCoroutine(Halt());
+                break;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch (typeEnemy)
+        switch (enemyType)
         {
             case EnemyType.exploder:
                 // charges towards the player to deal damage
+
+                if (player.gameObject.activeSelf)
+                {
+                    SetDirection(player.transform.position - transform.position);
+                }
+
+
+                transform.position += direction * speed * Time.deltaTime;
+
                 break;
 
             case EnemyType.flotilla:
                 // moves across the screen, continuously shooting
+
+                transform.position += direction * speed * Time.deltaTime;
+
                 break;
 
             case EnemyType.artillery:
                 // sits on the edge of the game area, shooting at the player
+
+                if (player.gameObject.activeSelf)
+                {
+                    SetDirection(player.transform.position - transform.position);
+                }
+
+                transform.position += direction * speed * Time.deltaTime;
+
                 break;
         }
-
-        // Temporary movement
-        if (player.gameObject.activeSelf)
-        {
-            SetDirection(player.transform.position - transform.position);
-        }
-
-        speed += acceleration;
-
-        if (speed > maxSpeed)
-        {
-            speed = maxSpeed;
-        }
-
-        velocity += direction * speed * Time.deltaTime;
-
-        transform.position += velocity;
     }
 
-    public void SetDirection(Vector3 newDirection)
+    private void SetDirection(Vector3 newDirection)
     {
         if (direction != null)
         {
@@ -81,8 +101,17 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    public void SetEnemyType(EnemyType typeEnemy)
+    private IEnumerator Halt()
     {
-        this.typeEnemy = typeEnemy;
+        yield return new WaitForSeconds(1);
+
+        speed = 0;
+    }
+
+    public void SetEnemyType(EnemyType enemyType, Vector3 direction)
+    {
+        this.enemyType = enemyType;
+        
+        this.direction = direction;
     }
 }

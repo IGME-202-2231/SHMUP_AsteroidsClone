@@ -112,6 +112,8 @@ public class EnemySpawner : MonoBehaviour
             collisionManager.Score += 100;
         }
 
+        playerTarget.gameObject.GetComponent<SpriteInfo>().ResetHealth();
+
         waveNumber++;
 
         waveKeeper.gameObject.SetActive(true);
@@ -147,39 +149,48 @@ public class EnemySpawner : MonoBehaviour
         {
             case 0:
                 enemyType = EnemyType.artillery;
+                numIterations = 1;
                 break;
 
             case 1:
                 enemyType = EnemyType.exploder;
+                numIterations = 1;
                 break;
 
             case 2:
                 enemyType = EnemyType.flotilla;
+                numIterations = 3;
                 break;
         }
 
         for (int i = 1; i < numIterations + 1; i++)
         {
+            Vector3 facing = Vector3.zero;
+
             switch (randomSide)
             {
                 case 0: // Left
                     startPosition.x = -halfWidth;
                     startPosition.y = halfHeight - ( (2 * halfHeight * i) / (numIterations + 1) );
+                    facing = Vector3.right;
                     break;
 
                 case 1: // Up
                     startPosition.x = halfWidth - ( (2 * halfWidth * i) / (numIterations + 1) );
                     startPosition.y = halfHeight;
+                    facing = Vector3.down;
                     break;
 
                 case 2: // Right
                     startPosition.x = halfWidth;
                     startPosition.y = halfHeight - ( (2 * halfHeight * i) / (numIterations + 1) );
+                    facing = Vector3.left;
                     break;
 
                 case 3: // Down
                     startPosition.x = halfWidth - ( (2 * halfWidth * i) / (numIterations + 1) ); 
                     startPosition.y = -halfHeight;
+                    facing = Vector3.up;
                     break;
             }
 
@@ -187,7 +198,7 @@ public class EnemySpawner : MonoBehaviour
 
             newEnemy.GetComponent<SpriteInfo>().GetCollisions(collisionManager);
 
-            newEnemy.GetComponent<EnemyMovement>().SetEnemyType(enemyType);
+            newEnemy.GetComponent<EnemyMovement>().SetEnemyType(enemyType, facing);
 
             collisionManager.AddCollidable(newEnemy, newEnemy.GetComponent<SpriteInfo>().CollisionType);
         }
