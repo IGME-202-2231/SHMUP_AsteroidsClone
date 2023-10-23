@@ -13,27 +13,26 @@
 -   Camera Movement: static / fixed
 -   Player Health: The player has a health bar that resets at the end of each round
 -   End Condition: The player's health is reduced to zero
--   Scoring: The player can earn points by killing enemies and completing a wave, while they are deducted for missed shots. Accuracy counts!
+-   Scoring: The player can earn points by killing enemies, and by surviving an entire wave
 
 ### Game Description
-A SCMUP clone most similar to the game Asteroids. The player has the freedom to move in any direction within the bounds of the screen, but as enemies start to fill the game space and attack the player things get a bit crowded. The player must survive an ever increasing number of enemies each wave for as long as possible, for there is no end of enemies in sight...
+An Asteroids clone, the player has the freedom to move in any direction within the bounds of the screen, but as enemies start to fill the game space and attack the player things get a bit crowded. The player must survive an ever increasing number of enemies each wave for as long as possible, the only true test is how long you'll be able to hold out before the enemy ships destroy you...
 
 ### Controls
 
--   Movement
-    -   Up: W / up arrow
-    -   Down: S / down arrow
-    -   Left: A / left arrow 
-    -   Right: D / right arrow
+-   Movement:
+   -   Direction: focus on player's cursor
+   -   Boost: space bar enables / disables acceleration
 -   Fire: Left Mouse Click
 
-## You Additions
-
+## Your Additions
 The game has mutiple different enemy types:
-    The Exploder: this enemy cannot fire projectiles, and must instead throw itself at the player in order to deal damage.
-    The Wave: a group of enemies that rely on numbers to catch the player, they start from one side of the screen and slowly move to the next. All the while firing projectiles in a straight line.
-    The 
+    The Exploder: While faster than the others, the exploder cannot fire projectiles. It instead throws itself at the player in order to deal damage.
+    The Flotilla: A group that relies on their numbers to catch the player. They sweep from one side of the screen to the next, all the while firing projectiles in a straight line.
+    The Artillery: Once they've made their way on screen, they become immobile and focus fire directly at the player, wherever they may be.
 
+Spawning: I designed the enemy spawner to be adaptable to the different types of enemies within the game as well as used in the ramping difficulty of subsequent waves; it randomly selects a side of the game area and spawns however many enemies is required, it then spaces out each enemy evenly across the selected edge.
+ 
 ## Sources
 
 Space Patrol Sprite Sheet -
@@ -47,7 +46,7 @@ https://adwitr.itch.io/pixel-health-bar-asset-pack-2
 
 ## Known Issues
 
-If the player is not inputing any movement controls, the projectiles will stay in place. If I am able to implement a much preferred look-at-mouse direction, this should fix the issue.
+
 
 ### Requirements not completed
 
