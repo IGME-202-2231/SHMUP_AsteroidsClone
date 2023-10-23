@@ -25,11 +25,11 @@ An Asteroids clone, the player has the freedom to move in any direction within t
 
 ## Your Additions
 The game has mutiple different enemy types:
-    The Exploder: While faster than the others, the exploder cannot fire projectiles. It instead throws itself at the player in order to deal damage.
-    The Flotilla: A group that relies on their numbers to catch the player. They sweep from one side of the screen to the next, all the while firing projectiles in a straight line.
-    The Artillery: Once they've made their way on screen, they become immobile and focus fire directly at the player, wherever they may be.
+-   The Exploder: While faster than the others, the exploder cannot fire projectiles. It instead throws itself at the player in order to deal damage.
+-   The Flotilla: A group that relies on their numbers to catch the player. They sweep from one side of the screen to the next, all the while firing projectiles in a straight line.
+-   The  Artillery: Once they've made their way on screen, they become immobile and focus fire directly at the player, wherever they may be.
 
-Spawning: I designed the enemy spawner to be adaptable to the different types of enemies within the game as well as used in the ramping difficulty of subsequent waves; it randomly selects a side of the game area and spawns however many enemies is required, it then spaces out each enemy evenly across the selected edge.
+-   Spawning: I designed the enemy spawner to be adaptable to the different types of enemies within the game as well as used in the ramping difficulty of subsequent waves; it randomly selects a side of the game area and spawns however many enemies is required, it then spaces out each enemy evenly across the selected edge.
  
 ## Sources
 
