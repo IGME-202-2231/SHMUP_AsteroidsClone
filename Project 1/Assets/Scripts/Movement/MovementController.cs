@@ -12,7 +12,7 @@ public class MovementController : MonoBehaviour
     private float acceleration = 2.0f;
 
     [SerializeField]
-    private float maxSpeed = 4.0f;
+    private float maxSpeed = 2.0f;
 
     private Vector3 velocity = Vector3.zero;
 

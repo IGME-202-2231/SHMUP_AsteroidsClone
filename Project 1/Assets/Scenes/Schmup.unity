@@ -1201,11 +1201,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4830061187118896206, guid: 426fedf9003c57e49b42f67be991f5b0, type: 3}
       propertyPath: maxSpeed
-      value: 1
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 4830061187118896206, guid: 426fedf9003c57e49b42f67be991f5b0, type: 3}
       propertyPath: acceleration
-      value: 0.1
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 7834814180286623092, guid: 426fedf9003c57e49b42f67be991f5b0, type: 3}
       propertyPath: m_Icon
