@@ -13,19 +13,19 @@ public class EnemyMovement : MonoBehaviour
 {
     private float speed = 0.0f;
 
-    [SerializeField]
-    private float acceleration = 0.005f;
-
-    [SerializeField]
-    private float maxSpeed = 0.01f;
-
-    private Vector3 velocity = Vector3.zero;
-
     private Vector3 direction = Vector3.zero;
 
     private Transform player;
 
     private EnemyType enemyType;
+
+    [SerializeField]
+    private FireProjectile projectileManager;
+
+    public Vector3 Direction
+    {
+        get { return direction; }
+    }
 
     void Start()
     {
@@ -34,12 +34,13 @@ public class EnemyMovement : MonoBehaviour
         switch (enemyType)
         {
             case EnemyType.exploder:
-                speed = 5;
+                speed = 4;
                 break;
 
             case EnemyType.flotilla:
-                speed = 4;
+                speed = 3;
                 StartCoroutine(gameObject.GetComponent<SpriteInfo>().Despawn());
+                StartCoroutine(Barrage());
                 break;
 
             case EnemyType.artillery:
@@ -61,7 +62,6 @@ public class EnemyMovement : MonoBehaviour
                 {
                     SetDirection(player.transform.position - transform.position);
                 }
-
 
                 transform.position += direction * speed * Time.deltaTime;
 
@@ -103,15 +103,32 @@ public class EnemyMovement : MonoBehaviour
 
     private IEnumerator Halt()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
 
         speed = 0;
+
+        StartCoroutine(Barrage());
     }
 
-    public void SetEnemyType(EnemyType enemyType, Vector3 direction)
+    private IEnumerator Barrage()
+    {
+        yield return new WaitForSeconds(2);
+
+        if (gameObject.activeSelf)
+        {
+            projectileManager.Fire(gameObject.transform);
+
+            StartCoroutine(Barrage());
+        }
+
+    }
+
+    public void GetInfo(EnemyType enemyType, Vector3 direction, FireProjectile projectileManager)
     {
         this.enemyType = enemyType;
         
         this.direction = direction;
+
+        this.projectileManager = projectileManager;
     }
 }

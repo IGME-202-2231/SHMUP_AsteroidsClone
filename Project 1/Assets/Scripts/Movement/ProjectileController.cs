@@ -20,8 +20,6 @@ public class ProjectileController : MonoBehaviour
 
         projectileDespawn = 3.0f;
 
-        // StartCoroutine(Despawn());
-
         StartCoroutine(gameObject.GetComponent<SpriteInfo>().Despawn());
     }
 
@@ -30,16 +28,10 @@ public class ProjectileController : MonoBehaviour
         transform.position += direction * speed * Time.deltaTime;
     }
 
-    private IEnumerator Despawn()
-    {
-        yield return new WaitForSeconds(projectileDespawn);
-
-        collisionManager.CleanUp(gameObject, gameObject.GetComponent<SpriteInfo>().CollisionType);
-    }
-
     public void GiveInfo(CollisionManager collisionManager, Vector3 direction)
     {
         this.collisionManager = collisionManager;
+
         this.direction = direction;
 
         gameObject.GetComponent<SpriteInfo>().GetCollisions(collisionManager);

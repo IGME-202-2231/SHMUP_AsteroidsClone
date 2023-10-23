@@ -5,7 +5,10 @@ using UnityEngine;
 public class FireProjectile : MonoBehaviour
 {
     [SerializeField]
-    private GameObject projectilePrefab;
+    private GameObject playerProjectile;
+
+    [SerializeField] 
+    private GameObject enemyProjectile;
 
     [SerializeField]
     private Transform player;
@@ -15,15 +18,20 @@ public class FireProjectile : MonoBehaviour
 
     public void Fire()
     {
-        GameObject projectile = Instantiate(projectilePrefab, player.position, player.rotation, transform);
+        GameObject projectile = Instantiate(playerProjectile, player.position, player.rotation, transform);
 
         projectile.GetComponent<ProjectileController>().GiveInfo(collisionManager, player.gameObject.GetComponent<MovementController>().Direction);
 
         collisionManager.AddCollidable(projectile, projectile.GetComponent<SpriteInfo>().CollisionType);
     }
 
-    public void GetCollisions(CollisionManager collisionManager)
+    public void Fire(Transform host)
     {
-        this.collisionManager = collisionManager;
+        GameObject projectile = Instantiate(enemyProjectile, host.position, host.rotation, transform);
+
+        projectile.GetComponent<ProjectileController>().GiveInfo(collisionManager, host.gameObject.GetComponent<EnemyMovement>().Direction);
+
+        collisionManager.AddCollidable(projectile, projectile.GetComponent<SpriteInfo>().CollisionType);
     }
+
 }

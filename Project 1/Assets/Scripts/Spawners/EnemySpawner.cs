@@ -17,6 +17,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private CollisionManager collisionManager;
 
+    [SerializeField]
+    private FireProjectile projectileManager;
+
     private float halfHeight;
 
     private float halfWidth;
@@ -198,7 +201,7 @@ public class EnemySpawner : MonoBehaviour
 
             newEnemy.GetComponent<SpriteInfo>().GetCollisions(collisionManager);
 
-            newEnemy.GetComponent<EnemyMovement>().SetEnemyType(enemyType, facing);
+            newEnemy.GetComponent<EnemyMovement>().GetInfo(enemyType, facing, projectileManager);
 
             collisionManager.AddCollidable(newEnemy, newEnemy.GetComponent<SpriteInfo>().CollisionType);
         }

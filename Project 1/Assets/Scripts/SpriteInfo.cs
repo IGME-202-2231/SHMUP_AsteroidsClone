@@ -77,7 +77,7 @@ public class SpriteInfo : MonoBehaviour
     }
 
     /// <summary>
-    /// These getinfo methods grab info when an object is instantiated, but could easily be removed if singletons were used
+    /// These getinfo methods grab info when an object is instantiated, but could easily be removed if a collisionManager singleton were used
     /// </summary>
     /// <param name="collisionManager"></param>
     public void GetCollisions(CollisionManager collisionManager)
