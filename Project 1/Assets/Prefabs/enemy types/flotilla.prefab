@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1145643970935101233}
   - component: {fileID: 258809318635850369}
   - component: {fileID: 2690842246660456704}
-  - component: {fileID: 4789594479895093200}
+  - component: {fileID: -4147385984574105779}
   m_Layer: 0
   m_Name: flotilla
   m_TagString: Untagged
@@ -102,7 +102,7 @@ MonoBehaviour:
   collisionType: 0
   radius: 0.31
   health: 1
---- !u!114 &4789594479895093200
+--- !u!114 &-4147385984574105779
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,8 +111,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8420705616303845821}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d1f7a042ae84f947b89842c9f94a6c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 465a137fc8153064ead75088fa40f5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 0.1
+  acceleration: 0.005
   maxSpeed: 0.01

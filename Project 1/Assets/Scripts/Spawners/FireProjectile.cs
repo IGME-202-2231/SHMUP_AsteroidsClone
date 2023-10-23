@@ -21,4 +21,9 @@ public class FireProjectile : MonoBehaviour
 
         collisionManager.AddCollidable(projectile, projectile.GetComponent<SpriteInfo>().CollisionType);
     }
+
+    public void GetCollisions(CollisionManager collisionManager)
+    {
+        this.collisionManager = collisionManager;
+    }
 }

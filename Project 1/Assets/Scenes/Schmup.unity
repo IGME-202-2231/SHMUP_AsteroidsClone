@@ -824,6 +824,7 @@ MonoBehaviour:
   waveKeeper: {fileID: 241987750}
   playerTarget: {fileID: 286259942}
   enemyPrefabs:
+  - {fileID: 8420705616303845821, guid: 2e8fbf715f34c534688b83467b08475d, type: 3}
   - {fileID: 8420705616303845821, guid: a09517893e0a5d74da0bd2856b37d1a6, type: 3}
   - {fileID: 8420705616303845821, guid: 69c2174ee54ee3947b4695c45e68238c, type: 3}
   collisionManager: {fileID: 1313338960}

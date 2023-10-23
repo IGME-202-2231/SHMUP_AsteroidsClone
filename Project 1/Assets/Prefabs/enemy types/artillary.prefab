@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1145643970935101233}
   - component: {fileID: 258809318635850369}
   - component: {fileID: 2690842246660456704}
-  - component: {fileID: 2719098599778634831}
+  - component: {fileID: -2609373023709752760}
   m_Layer: 0
-  m_Name: exploder
+  m_Name: artillary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1168523042, guid: 4081d805379baf0499221df1d921afc8, type: 3}
+  m_Sprite: {fileID: -854922147, guid: 4081d805379baf0499221df1d921afc8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
   collisionType: 0
   radius: 0.31
   health: 1
---- !u!114 &2719098599778634831
+--- !u!114 &-2609373023709752760
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

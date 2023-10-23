@@ -95,10 +95,7 @@ public class EnemySpawner : MonoBehaviour
         {
             enemyReserves--;
 
-            int randomSide = Random.Range(0, 4);
-            int enemyType = Random.Range(0, enemyPrefabs.Length);
-
-            Spawn(randomSide, enemyType);
+            Spawn();
 
             StartCoroutine(WhenToSpawn());
         }
@@ -134,21 +131,36 @@ public class EnemySpawner : MonoBehaviour
         // not sure how to get around the two switch blocks, perhaps x variable could divide the starting position by 2, simply becuase there is one enemy
         // additional enemies would divide the start pos. by the number of enemies being spawned
         // TLDR; create a spawning method around spawning multiple enemies, then spawning for a single enemy would be much easier
-    public void Spawn(int side, int enemyType)
+    public void Spawn()
     {
         Vector3 startPosition = Vector3.zero;
 
+        EnemyType enemyType = EnemyType.artillery;
+
+        int typeKeeper = Random.Range(0, enemyPrefabs.Length);
+
+        int randomSide = Random.Range(0, 4);
+
         int numIterations = 1;
 
-        // This if statement will do while only the flotilla prefab has a different number of enemies spawning - this may change when making waves more difficult
-        if (enemyType == 2) 
+        switch(typeKeeper)
         {
-            numIterations = 3;
+            case 0:
+                enemyType = EnemyType.artillery;
+                break;
+
+            case 1:
+                enemyType = EnemyType.exploder;
+                break;
+
+            case 2:
+                enemyType = EnemyType.flotilla;
+                break;
         }
 
         for (int i = 1; i < numIterations + 1; i++)
         {
-            switch (side)
+            switch (randomSide)
             {
                 case 0: // Left
                     startPosition.x = -halfWidth;
@@ -171,9 +183,11 @@ public class EnemySpawner : MonoBehaviour
                     break;
             }
 
-            GameObject newEnemy = Instantiate(enemyPrefabs[enemyType], startPosition, Quaternion.identity, transform);
+            GameObject newEnemy = Instantiate(enemyPrefabs[typeKeeper], startPosition, Quaternion.identity, transform);
 
             newEnemy.GetComponent<SpriteInfo>().GetCollisions(collisionManager);
+
+            newEnemy.GetComponent<EnemyMovement>().SetEnemyType(enemyType);
 
             collisionManager.AddCollidable(newEnemy, newEnemy.GetComponent<SpriteInfo>().CollisionType);
         }
