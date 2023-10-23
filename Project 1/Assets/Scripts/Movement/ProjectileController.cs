@@ -26,10 +26,8 @@ public class ProjectileController : MonoBehaviour
 
     public void GiveInfo(CollisionManager collisionManager, Vector3 direction)
     {
-        this.collisionManager = collisionManager;
+        gameObject.GetComponent<SpriteInfo>().GetCollisions(collisionManager);
 
         this.direction = direction;
-
-        gameObject.GetComponent<SpriteInfo>().GetCollisions(collisionManager);
     }
 }

@@ -108,7 +108,7 @@ public class EnemySpawner : MonoBehaviour
     {
         if (waveNumber != 0)
         {
-            spawnTimer -= 0.2f;
+            spawnTimer -= 0.5f;
             enemyWaveTotal += 5;
             enemyReserves = enemyWaveTotal;
 

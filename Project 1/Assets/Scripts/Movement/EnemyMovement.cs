@@ -48,6 +48,8 @@ public class EnemyMovement : MonoBehaviour
                 StartCoroutine(Halt());
                 break;
         }
+
+        SetDirection(direction);
     }
 
     // Update is called once per frame
