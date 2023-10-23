@@ -90,9 +90,9 @@ public class SpriteInfo : MonoBehaviour
         health = maxHealth;
     }
 
-    public IEnumerator Despawn()
+    public IEnumerator Despawn(float timeDespawn)
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(timeDespawn);
 
         collisionManager.CleanUp(gameObject, gameObject.GetComponent<SpriteInfo>().CollisionType);
     }

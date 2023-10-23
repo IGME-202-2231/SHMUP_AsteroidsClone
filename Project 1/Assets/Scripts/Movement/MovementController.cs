@@ -86,19 +86,6 @@ public class MovementController : MonoBehaviour
         transform.position = objectPosition;
     }
 
-    public void SetDirection(Vector3 newDirection) // Legacy
-    {
-        if (direction != null)
-        {
-            direction = newDirection.normalized;
-
-            if (direction != Vector3.zero)
-            {
-                transform.rotation = Quaternion.LookRotation(Vector3.back, direction);
-            }
-        }
-    }
-
     public void PointDirection(Vector2 cameraPosition)
     {
         // Made sure the cameraPosition is Vector2D, prevents objects from moving on z axis

@@ -10,17 +10,13 @@ public class ProjectileController : MonoBehaviour
 
     private float speed;
 
-    private float projectileDespawn;
-
     void Start()
     {
         // Here is where all my problems lie, behold and weep yee of fragile hearts
             // I was being dramatic, passing in the objects when they are spawned fixed it
         speed = 10.0f;
 
-        projectileDespawn = 3.0f;
-
-        StartCoroutine(gameObject.GetComponent<SpriteInfo>().Despawn());
+        StartCoroutine(gameObject.GetComponent<SpriteInfo>().Despawn(3.0f));
     }
 
     void Update()

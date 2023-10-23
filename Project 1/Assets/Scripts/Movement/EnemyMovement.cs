@@ -38,8 +38,8 @@ public class EnemyMovement : MonoBehaviour
                 break;
 
             case EnemyType.flotilla:
-                speed = 3;
-                StartCoroutine(gameObject.GetComponent<SpriteInfo>().Despawn());
+                speed = 1.5f;
+                StartCoroutine(gameObject.GetComponent<SpriteInfo>().Despawn(15.0f));
                 StartCoroutine(Barrage());
                 break;
 
@@ -103,7 +103,7 @@ public class EnemyMovement : MonoBehaviour
 
     private IEnumerator Halt()
     {
-        yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
+        yield return new WaitForSeconds(1);
 
         speed = 0;
 
@@ -112,7 +112,7 @@ public class EnemyMovement : MonoBehaviour
 
     private IEnumerator Barrage()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(Random.Range(0.5f, 0.8f));
 
         if (gameObject.activeSelf)
         {

@@ -1220,6 +1220,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8200452146066915699, guid: 426fedf9003c57e49b42f67be991f5b0, type: 3}
+      propertyPath: maxHealth
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200452146066915699, guid: 426fedf9003c57e49b42f67be991f5b0, type: 3}
       propertyPath: collisionManager
       value: 
       objectReference: {fileID: 1313338960}

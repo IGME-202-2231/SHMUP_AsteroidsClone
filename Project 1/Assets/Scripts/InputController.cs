@@ -23,11 +23,6 @@ public class InputController : MonoBehaviour
         }
     }
 
-    public void OnMove(InputAction.CallbackContext context) // Legacy
-    {
-        movementController.SetDirection(context.ReadValue<Vector2>());
-    }
-
     public void OnLook(InputAction.CallbackContext context)
     {
         movementController.PointDirection(cam.ScreenToWorldPoint(context.ReadValue<Vector2>()));
