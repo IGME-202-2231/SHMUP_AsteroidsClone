@@ -19,10 +19,8 @@
 An Asteroids clone, the player has the freedom to move in any direction within the bounds of the screen, but as enemies start to fill the game space and attack the player things get a bit crowded. The player must survive an ever increasing number of enemies each wave for as long as possible, the only true test is how long you'll be able to hold out before the enemy ships destroy you...
 
 ### Controls
-
--   Movement:
-   -   Direction: focus on player's cursor
-   -   Boost: space bar enables / disables acceleration
+-   Direction: pointed on player's cursor
+-   Boost: space bar enables / disables acceleration
 -   Fire: Left Mouse Click
 
 ## Your Additions
