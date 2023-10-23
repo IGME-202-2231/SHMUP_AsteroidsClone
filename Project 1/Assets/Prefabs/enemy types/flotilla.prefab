@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2690842246660456704}
   - component: {fileID: 4789594479895093200}
   m_Layer: 0
-  m_Name: waveEnemy
+  m_Name: flotilla
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1168523042, guid: 4081d805379baf0499221df1d921afc8, type: 3}
+  m_Sprite: {fileID: 390069375, guid: 4081d805379baf0499221df1d921afc8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3457218892977a40bd6d9ef93da3582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionManager: {fileID: 0}
   collisionType: 0
   radius: 0.31
   health: 1

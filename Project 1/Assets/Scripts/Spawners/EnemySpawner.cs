@@ -58,14 +58,11 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         halfHeight = Camera.main.orthographicSize;
-
         halfWidth = halfHeight * Camera.main.aspect;
 
         spawnTimer = 5.2f;
-
         enemyWaveTotal = 3;
         enemyReserves = enemyWaveTotal;
-
         waveNumber = 0;
 
         StartCoroutine(NextWave());
@@ -98,7 +95,10 @@ public class EnemySpawner : MonoBehaviour
         {
             enemyReserves--;
 
-            Spawn();
+            int randomSide = Random.Range(0, 4);
+            int enemyType = Random.Range(0, enemyPrefabs.Length);
+
+            Spawn(randomSide, enemyType);
 
             StartCoroutine(WhenToSpawn());
         }
@@ -129,86 +129,54 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
-    public void Spawn()
+    // Its not the most effective way to spawn the flotilla, best case would be to have a single create method that could be cycled through x number of times
+        // starting position would be calculated based on the side, and dividing by this x variable
+        // not sure how to get around the two switch blocks, perhaps x variable could divide the starting position by 2, simply becuase there is one enemy
+        // additional enemies would divide the start pos. by the number of enemies being spawned
+        // TLDR; create a spawning method around spawning multiple enemies, then spawning for a single enemy would be much easier
+    public void Spawn(int side, int enemyType)
     {
-        int enemyType = Random.Range(0, enemyPrefabs.Length); // int Range max is exclusive
-
-        int side = Random.Range(0, 4);
-
-        float normalPosition = Random.Range(-1.0f, 1.0f);
-
         Vector3 startPosition = Vector3.zero;
 
-        switch (side)
+        int numIterations = 1;
+
+        // This if statement will do while only the flotilla prefab has a different number of enemies spawning - this may change when making waves more difficult
+        if (enemyType == 2) 
         {
-            case 0: // Left
-                startPosition.x = -halfWidth;
-                startPosition.y = halfHeight * normalPosition;
-                break;
-
-            case 1: // Up
-                startPosition.x = halfWidth * normalPosition;
-                startPosition.y = halfHeight;
-                break;
-
-            case 2: // Right
-                startPosition.x = halfWidth;
-                startPosition.y = halfHeight * normalPosition;
-                break;
-
-            case 3: // Down
-                startPosition.x = halfWidth * normalPosition;
-                startPosition.y = -halfHeight;
-                break;
+            numIterations = 3;
         }
 
-        GameObject newEnemy = Instantiate(enemyPrefabs[enemyType], startPosition, Quaternion.identity, transform);
-
-        newEnemy.GetComponent<SpriteInfo>().GetCollisions(collisionManager);
-
-        collisionManager.AddCollidable(newEnemy, newEnemy.GetComponent<SpriteInfo>().CollisionType);
-    }
-
-    public void Single(GameObject newEnemy, int side, Vector3 startPosition, float normalPosition, int enemyType)
-    {
-        switch (side)
+        for (int i = 1; i < numIterations + 1; i++)
         {
-            case 0: // Left
-                startPosition.x = -halfWidth;
-                startPosition.y = halfHeight * normalPosition;
-                break;
+            switch (side)
+            {
+                case 0: // Left
+                    startPosition.x = -halfWidth;
+                    startPosition.y = halfHeight - ( (2 * halfHeight * i) / (numIterations + 1) );
+                    break;
 
-            case 1: // Up
-                startPosition.x = halfWidth * normalPosition;
-                startPosition.y = halfHeight;
-                break;
+                case 1: // Up
+                    startPosition.x = halfWidth - ( (2 * halfWidth * i) / (numIterations + 1) );
+                    startPosition.y = halfHeight;
+                    break;
 
-            case 2: // Right
-                startPosition.x = halfWidth;
-                startPosition.y = halfHeight * normalPosition;
-                break;
+                case 2: // Right
+                    startPosition.x = halfWidth;
+                    startPosition.y = halfHeight - ( (2 * halfHeight * i) / (numIterations + 1) );
+                    break;
 
-            case 3: // Down
-                startPosition.x = halfWidth * normalPosition;
-                startPosition.y = -halfHeight;
-                break;
+                case 3: // Down
+                    startPosition.x = halfWidth - ( (2 * halfWidth * i) / (numIterations + 1) ); 
+                    startPosition.y = -halfHeight;
+                    break;
+            }
+
+            GameObject newEnemy = Instantiate(enemyPrefabs[enemyType], startPosition, Quaternion.identity, transform);
+
+            newEnemy.GetComponent<SpriteInfo>().GetCollisions(collisionManager);
+
+            collisionManager.AddCollidable(newEnemy, newEnemy.GetComponent<SpriteInfo>().CollisionType);
         }
-
-        newEnemy = Instantiate(enemyPrefabs[enemyType], startPosition, Quaternion.identity, transform);
-
-        newEnemy.GetComponent<SpriteInfo>().GetCollisions(collisionManager);
-
-        collisionManager.AddCollidable(newEnemy, newEnemy.GetComponent<SpriteInfo>().CollisionType);
-    }
-
-    public void Flotilla(GameObject newEnemy)
-    {
-        // switch statement to determine
-
-        // Instantiate 3 new flotilla enemies
-            // pass in their unique starting positions
-
-        //
     }
 
     // Instantiate a new enemy COMPLETE
